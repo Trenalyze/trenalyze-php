@@ -1,0 +1,17 @@
+{
+    "name": "treasure/trenalyze-php",
+    "description": "A whatsApp API for sending whatsapp Messages with your own custom phone number",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Trenalyze": "src/"
+        }
+    },
+    "authors": [{
+        "name": "Treasure Uvietobore",
+        "email": "52765128+treasure567@users.noreply.github.com"
+    }],
+    "minimum-stability": "stable",
+    "require": {}
+}
