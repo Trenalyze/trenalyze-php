@@ -29,7 +29,7 @@ class Trenalyze {
         ];
         $path = '/send';
         
-        return self::curlRequest($data, $url, $path); // Return the result
+        return json_encode(self::curlRequest($data, $url, $path)); // Return the result
     }
 
     private static function curlRequest($data, $url, $path) {
@@ -45,7 +45,7 @@ class Trenalyze {
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
         $response = curl_exec($ch);
         curl_close($ch);
-        return $response; 
+        return json_encode($response); 
     }   
 
     private static function appurl(){
