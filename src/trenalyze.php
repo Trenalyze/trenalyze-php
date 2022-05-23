@@ -1,5 +1,7 @@
 <?php
 
+namespace Trenalyze;
+
 class Trenalyze {
     public function __construct($token, $sender) {
         $this->token = $token;
