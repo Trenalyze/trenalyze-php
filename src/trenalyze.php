@@ -2,6 +2,10 @@
 
 namespace Trenalyze;
 
+require_once __DIR__ . '/../includes/validator.php';
+
+use Trenalyze\Validator\Validator;
+
 class Trenalyze {
     public function __construct($token, $sender, $debug = false) {
         $this->token = $token;
@@ -10,22 +14,35 @@ class Trenalyze {
     }
 
     private static function getToken($token, $debug) {
-        return $token;
+        $validate = json_decode(Validator::validateToken($token));
+        if ($validate->status) {
+            return $token;
+        } else {
+            $info = [
+                'statusCode' => 400
+            ];
+
+            if ($debug) {
+                $info['message'] = $validate->message;
+            }
+            die(json_encode($info));
+        }
     }
 
     private static function getSender($sender, $debug) {
-        
-        $info = [
-            'statusCode' => 400,
-            'message' => 'Bad Request'
-        ];
+        $validate = json_decode(Validator::validateSender($sender));
+        if ($validate->status) {
+            return $sender;
+        } else {
+            $info = [
+                'statusCode' => 400
+            ];
 
-        if ($debug) {
-            $info['debugMessage'] = 'Sender is not a valid WhatsApp number';
+            if ($debug) {
+                $info['message'] = $validate->message;
+            }
+            die(json_encode($info));
         }
-
-        die(json_encode($info));
-       // return $sender;
     }
 
     private static function appurl(){
