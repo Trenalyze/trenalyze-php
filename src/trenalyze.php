@@ -8,12 +8,16 @@ class Trenalyze {
         $this->sender = $sender;
     }
 
-    public function getToken() {
-        return $this->token;
+    private static function getToken($token) {
+        return $token;
     }
 
-    public function getSender() {
-        return $this->sender;
+    private static function getSender($sender) {
+        return $sender;
+    }
+
+    private static function appurl(){
+        return 'https://trenalyze.com';
     }
 
     public function sendMessage($receiver, $message, $buttons = '', $mediaurl = '') {
@@ -21,15 +25,51 @@ class Trenalyze {
         $data = [
             'receiver'  => $receiver,
             'msgtext'   => $message,
-            'sender'    => $this->sender,
-            'token'     => $this->token,
+            'sender'    => self::getSender($this->sender),
+            'token'     => self::getToken($this->token),
             'appurl'    => self::appurl(),
             'mediaurl'  => $mediaurl,
             'buttons'   => $buttons,
         ];
         $path = '/send';
-        
-        return json_encode(self::curlRequest($data, $url, $path)); // Return the result
+        $sendReq = self::curlRequest($data, $url, $path);
+        switch ($sendReq) {
+            case 200:
+                $httpcode = 200;
+                $message = 'WhatsApp Message was sent successfully';
+                break;
+            case 500:
+                $httpcode = 500;
+                $message = 'Internal Server Error';
+                break;
+            case 400:
+                $httpcode = 400;
+                $message = 'Bad Request';
+                break;
+            case 401:
+                $httpcode = 401;
+                $message = 'Unauthorized';
+                break;
+            case 403:
+                $httpcode = 403;
+                $message = 'Forbidden';
+                break;
+            case 404:
+                $httpcode = 404;
+                $message = 'Not Found';
+                break;
+            default:
+                $httpcode = 500;
+                $message = 'Internal Server Error';
+                break;
+        }
+
+        $info = json_encode(array(
+            'statusCode' => $httpcode,
+            'message' => $message
+        ), JSON_THROW_ON_ERROR);
+
+        return $info; // Return the result
     }
 
     private static function curlRequest($data, $url, $path) {
@@ -44,11 +84,8 @@ class Trenalyze {
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
         $response = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-        return json_encode($response); 
+        return $httpcode; 
     }   
-
-    private static function appurl(){
-        return 'https://trenalyze.com';
-    }
 }
