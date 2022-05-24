@@ -29,6 +29,38 @@ class Trenalyze {
         }
     }
 
+    private static function getMediaUrl($mediaurl, $debug) {
+        $validate = json_decode(Validator::validateUrl($mediaurl));
+        if ($validate->status) {
+            return $mediaurl;
+        } else {
+            $info = [
+                'statusCode' => 400
+            ];
+
+            if ($debug) {
+                $info['message'] = $validate->message;
+            }
+            die(json_encode($info));
+        }
+    }
+
+    private static function getButtons($buttons, $debug) {
+        $validate = json_decode(Validator::validateButtons($buttons));
+        if ($validate->status) {
+            return $buttons;
+        } else {
+            $info = [
+                'statusCode' => 400
+            ];
+
+            if ($debug) {
+                $info['message'] = $validate->message;
+            }
+            die(json_encode($info));
+        }
+    }
+
     private static function getSender($sender, $debug) {
         $validate = json_decode(Validator::validateSender($sender));
         if ($validate->status) {
@@ -50,6 +82,14 @@ class Trenalyze {
     }
 
     public function sendMessage($receiver, $message, $buttons = '', $mediaurl = '') {
+        if ($mediaurl != '') {
+            $mediaurl = self::getMediaUrl($mediaurl, $this->debug);
+        }
+
+        if ($buttons !== '') {
+            $buttons = self::getButtons($buttons, $this->debug);
+        }
+
         $url = 'https://api.trenalyze.com';
         $data = [
             'receiver'  => $receiver,
@@ -93,12 +133,12 @@ class Trenalyze {
                 break;
         }
 
-        $info = json_encode(array(
+        $info =[
             'statusCode' => $httpcode,
             'message' => $message
-        ), JSON_THROW_ON_ERROR);
-
-        return $info; // Return the result
+        ];
+        
+        return json_encode($info); // Return the result
     }
 
     private static function curlRequest($data, $url, $path) {
