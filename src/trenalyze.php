@@ -3,17 +3,28 @@
 namespace Trenalyze;
 
 class Trenalyze {
-    public function __construct($token, $sender) {
+    public function __construct($token, $sender, $debug = false) {
         $this->token = $token;
         $this->sender = $sender;
+        $this->debug = $debug || false;
     }
 
-    private static function getToken($token) {
+    private static function getToken($token, $debug) {
         return $token;
     }
 
-    private static function getSender($sender) {
-        return $sender;
+    private static function getSender($sender, $debug) {
+        $info = [
+            'statusCode' => 400,
+            'message' => 'Bad Request'
+        ];
+
+        if ($debug) {
+            $info['debugMessage'] = 'Sender is not a valid WhatsApp number';
+        }
+
+        die(json_encode($info));
+       // return $sender;
     }
 
     private static function appurl(){
@@ -25,8 +36,8 @@ class Trenalyze {
         $data = [
             'receiver'  => $receiver,
             'msgtext'   => $message,
-            'sender'    => self::getSender($this->sender),
-            'token'     => self::getToken($this->token),
+            'sender'    => self::getSender($this->sender, $this->debug),
+            'token'     => self::getToken($this->token, $this->debug),
             'appurl'    => self::appurl(),
             'mediaurl'  => $mediaurl,
             'buttons'   => $buttons,
