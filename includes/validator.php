@@ -61,16 +61,16 @@ class Validator {
         }
     }
 
-    public function validateSender($sender) {
+    static function validateSender($sender) {
         $sender = filter_var($sender, FILTER_VALIDATE_REGEXP, [
             'options' => [
-                'regexp' => '/^\+?[0-9]{11}$/'
+                'regexp' => '/^[0-9]{11,15}$/'
             ]
         ]);
         if ($sender === false) {
             $info = [
                 'status' => false,
-                'message' => 'Sender is not a valid WhatsApp number'
+                'message' => 'Sender is not a valid WhatsApp Number'
             ];
             
             return json_encode($info);
@@ -79,12 +79,11 @@ class Validator {
                 'status' => true,
                 'message' => 'Valid sender'
             ];
-            
             return json_encode($info);
         }
     }
 
-    public function validateToken($token) {
+    static function validateToken($token) {
         $token = filter_var($token, FILTER_VALIDATE_REGEXP, [
             'options' => [
                 'regexp' => '/^[a-zA-Z0-9]{20}$/'
@@ -102,7 +101,6 @@ class Validator {
                 'status' => true,
                 'message' => 'Valid token'
             ];
-            
             return json_encode($info);
         }
     }
