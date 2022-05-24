@@ -1,4 +1,4 @@
-# trenalyze
+# trenalyze(PHP) V1.0.0
 
 [Author](https://treasureuvietobore.com/) |
 [Docs](https://github.com/Trenalyze/trenalyze-php#readme)
