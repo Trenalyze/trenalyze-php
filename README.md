@@ -60,15 +60,15 @@ $wa = new Trenalyze(YOUR_TRENALYZE_TOKEN_HERE, YOUR_WHATASPP_NUMBER_HERE, true);
 | buttons | `array` | (OPTIONAL). **BUT MUST BE DECLARED** You can attach quick replies buttons to your message. [Learn More](https://trenalyze.com) |
 ```php
 // Set the Required Parameters for sending message 
-$details = {
-    $receiver: '123456789',
-    $message: 'Hello World',
-    $mediaurl: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
-    $buttons: [{
-        text: 'Click Me',
-        url: 'https://trenalyze.com'
-    }]
-}
+$receiver: '123456789',
+$message: 'Hello World',
+$mediaurl: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+$buttons: [
+    ['index' => 1, 'urlButton' => ['displayText' => 'Visit my website!', 'url' => 'https://trenalyze.com']],
+    ['index' => 2, 'callButton' => ['displayText' => 'Call me!', 'phoneNumber' => '+1 (234) 5678-9012']],
+    ['index' => 3, 'quickReplyButton' => ['displayText' => 'This is a reply, just like normal buttons!', 'id' => 'id-like-buttons-message']],
+];
+
 ```
 **NOTE:** When not using **mediaurl** and **buttons** set to **NULL**
 ```js
@@ -80,16 +80,22 @@ buttons: ''
 
 | Param | Type | Description |
 | --- | --- | --- |
-| details | `array(variable)` | Send the variable declared in step **2** |
+| receiver | `interger` | Phone number should be in following format `12345678912`, without `+` or any other symbols. |
+| message | `interger` | Enter the desired text message to send. |
+| mediaurl | `string` | (OPTIONAL). **BUT MUST BE DECLARED** This should be a valid media/file link. [Learn More](https://trenalyze.com) |
+| buttons | `array` | (OPTIONAL). **BUT MUST BE DECLARED** You can attach quick replies buttons to your message. [Learn More](https://trenalyze.com) |
 
-```js
+```php
 // Initialize the send whatsapp message functions
-wa.sendMessage(details, (error, data) => {
-    if (data.statusCode !== 200) {
-        console.log('Error: ' + data.statusMessage);
-    } else {
-        console.log('Success ' + data.statusMessage);
-    }
-});
+$res = json_decode($wa->sendMessage($receiver, $message, $buttons, $mediaurl));
+```
 
+### 4. Ensure to get the status of step 3 Action
+
+```php
+if ($res->statusCode != 200) {
+    echo $res->message;
+} else {
+    echo 'WhatsApp Message sent successfully';
+}
 ```
