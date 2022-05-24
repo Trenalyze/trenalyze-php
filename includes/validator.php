@@ -104,4 +104,58 @@ class Validator {
             return json_encode($info);
         }
     }
+
+    static function validateApiUrl($apiUrl) {
+        $url = filter_var($apiUrl, FILTER_VALIDATE_URL);
+        if ($url) {
+            if ($apiUrl === 'https://api.trenalyze.com') {
+                $info = [
+                    'status' =>true,
+                    'message' => 'Valid API URL'
+                ];
+
+                return json_encode($info);
+            } else {
+                $info = [
+                    'status' => false,
+                    'message' => 'Invalid API URL. It must be https://api.trenalyze.com'
+                ];
+
+                return json_encode($info);
+            }
+        } else {
+            $info = [
+                'status' => false,
+                'message' => 'Invalid API URL. Please don\'t Change the Default'
+            ];
+            return json_encode($info);
+        }
+    }
+
+    static function validateAppUrl($appUrl) {
+        $url = filter_var($appUrl, FILTER_VALIDATE_URL);
+        if ($url) {
+            if ($appUrl === 'https://trenalyze.com') {
+                $info = [
+                    'status' =>true,
+                    'message' => 'Valid App URL'
+                ];
+
+                return json_encode($info);
+            } else {
+                $info = [
+                    'status' => false,
+                    'message' => 'Invalid APP URL. Please don\'t Change the Default'
+                ];
+
+                return json_encode($info);
+            }
+        } else {
+            $info = [
+                'status' => false,
+                'message' => 'Invalid APP URL. Please don\'t Change the Default'
+            ];
+            return json_encode($info);
+        }
+    }
 }
