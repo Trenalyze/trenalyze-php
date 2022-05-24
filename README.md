@@ -42,9 +42,10 @@ use Trenalyze\Trenalyze;
 | token | `string` | Use your Trenalyze Token from your [Dashboard](https://trenalyze.com). |
 | sender | `interger` | Enter the WhatApp Number that has already be scanned on the Trenalyze [Dashboard](https://trenalyze.com). |
 | debug | `boolean` | (OPTIONAL). Default is false. But you can set to be true and the debug message is passed onto the console. |
-```js
+
+```php
 // Set The Config
-const wa = new Trenalyze(YOUR_TRENALYZE_TOKEN_HERE, YOUR_WHATASPP_NUMBER_HERE, true);
+$wa = new Trenalyze(YOUR_TRENALYZE_TOKEN_HERE, YOUR_WHATASPP_NUMBER_HERE, true);
 ```
 
 **Note:** Phone number should be in following format `12345678912`, without `+` or any other symbols
@@ -57,13 +58,13 @@ const wa = new Trenalyze(YOUR_TRENALYZE_TOKEN_HERE, YOUR_WHATASPP_NUMBER_HERE, t
 | message | `interger` | Enter the desired text message to send. |
 | mediaurl | `string` | (OPTIONAL). **BUT MUST BE DECLARED** This should be a valid media/file link. [Learn More](https://trenalyze.com) |
 | buttons | `array` | (OPTIONAL). **BUT MUST BE DECLARED** You can attach quick replies buttons to your message. [Learn More](https://trenalyze.com) |
-```js
+```php
 // Set the Required Parameters for sending message 
-const details = {
-    receiver: '123456789',
-    message: 'Hello World',
-    mediaurl: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
-    buttons: [{
+$details = {
+    $receiver: '123456789',
+    $message: 'Hello World',
+    $mediaurl: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+    $buttons: [{
         text: 'Click Me',
         url: 'https://trenalyze.com'
     }]
