@@ -14,6 +14,7 @@ class Trenalyze {
     }
 
     private static function getSender($sender, $debug) {
+        
         $info = [
             'statusCode' => 400,
             'message' => 'Bad Request'
