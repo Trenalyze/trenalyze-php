@@ -5,12 +5,12 @@ namespace Trenalyze\Validator;
 
 
 class Validator {
-    public function validateUrl($url) {
+    static function validateUrl($url) {
         $url = filter_var($url, FILTER_VALIDATE_URL);
         if ($url === false) {
             $info = [
                 'status' => false,
-                'message' => 'Invalid URL'
+                'message' => 'Oops Media url Must be a valid URL'
             ];
             
             return json_encode($info);
@@ -24,7 +24,7 @@ class Validator {
         }
     }
 
-    public function validateDebug($debug) {
+    static function validateDebug($debug) {
         $validate = filter_var($debug, FILTER_VALIDATE_BOOLEAN);
         if ($validate === false) {
             $info = [
@@ -43,7 +43,7 @@ class Validator {
         }
     }
 
-    public function validateButtons($buttons) {
+    static function validateButtons($buttons) {
         if (is_array($buttons)) {
             $info = [
                 'status' => true,
