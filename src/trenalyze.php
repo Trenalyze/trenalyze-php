@@ -149,28 +149,8 @@ class Trenalyze {
         }
     }
 
-    private static function appurl(){
-        return 'https://trenalyze.com'; // It must be 'https://trenalyze.com'
-    }
-
     private static function apiurl(){
-        return 'https://api.trenalyze.com'; // It must be 'https://api.trenalyze.com'
-    }
-
-    private static function getAppUrl($appUrl, $debug) {
-        $validate = json_decode(Validator::validateAppUrl($appUrl));
-        if ($validate->status) {
-            return $appUrl;
-        } else {
-            $info = [
-                'statusCode' => 400
-            ];
-
-            if ($debug) {
-                $info['message'] = $validate->message;
-            }
-            die(json_encode($info));
-        }
+        return 'https://trenalyze.com/public/api'; // It must be 'https://trenalyze.com/public/api/send'
     }
 
     private static function getApiUrl($apiUrl, $debug) {
@@ -210,7 +190,6 @@ class Trenalyze {
         }
 
         $apiUrl = self::getApiUrl(self::apiurl(), $this->debug);
-        $appUrl = self::getAppUrl(self::appurl(), $this->debug);
 
         $url = $apiUrl;
         $data = [
@@ -218,7 +197,6 @@ class Trenalyze {
             'msgtext'   => $message,
             'sender'    => self::getSender($this->sender, $this->debug),
             'token'     => self::getToken($this->token, $this->debug),
-            'appurl'    => $appUrl,
             'mediaurl'  => $mediaurl,
             'buttons'   => $buttons,
         ];
@@ -267,7 +245,7 @@ class Trenalyze {
  * It takes a data array, a url, and a path, and returns the http code of the response.
  * 
  * @param data The data to be sent to the API.
- * @param url https://api.trenalyze.com
+ * @param url https://trenalyze.com/public/api/send
  * @param path /send
  * 
  * @return The HTTP response code.
