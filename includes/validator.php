@@ -108,7 +108,7 @@ class Validator {
     static function validateApiUrl($apiUrl) {
         $url = filter_var($apiUrl, FILTER_VALIDATE_URL);
         if ($url) {
-            if ($apiUrl === 'https://api.trenalyze.com') {
+            if ($apiUrl === 'https://trenalyze.com/public/api') {
                 $info = [
                     'status' =>true,
                     'message' => 'Valid API URL'
@@ -118,7 +118,7 @@ class Validator {
             } else {
                 $info = [
                     'status' => false,
-                    'message' => 'Invalid API URL. It must be https://api.trenalyze.com'
+                    'message' => 'Invalid API URL. It must be https://trenalyze.com/public/api'
                 ];
 
                 return json_encode($info);
@@ -127,33 +127,6 @@ class Validator {
             $info = [
                 'status' => false,
                 'message' => 'Invalid API URL. Please don\'t Change the Default'
-            ];
-            return json_encode($info);
-        }
-    }
-
-    static function validateAppUrl($appUrl) {
-        $url = filter_var($appUrl, FILTER_VALIDATE_URL);
-        if ($url) {
-            if ($appUrl === 'https://trenalyze.com') {
-                $info = [
-                    'status' =>true,
-                    'message' => 'Valid App URL'
-                ];
-
-                return json_encode($info);
-            } else {
-                $info = [
-                    'status' => false,
-                    'message' => 'Invalid APP URL. Please don\'t Change the Default'
-                ];
-
-                return json_encode($info);
-            }
-        } else {
-            $info = [
-                'status' => false,
-                'message' => 'Invalid APP URL. Please don\'t Change the Default'
             ];
             return json_encode($info);
         }
