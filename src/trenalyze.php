@@ -34,7 +34,7 @@ class Trenalyze {
     * @param $sender 'The phone number you want to send the message from.
     * @param $debug 'If set to true, the script will output the response from the API.
     */
-    public function __construct($token, $sender, $debug = false) {
+    public function __construct($token = '', $sender = '', $debug = false) {
 
        /* Assigning the value of the token variable to the ->token variable. */
         $this->token = $token;
