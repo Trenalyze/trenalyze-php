@@ -1,62 +1,93 @@
 <?php 
 
+/* 
+    Author: Treasure Uvietobore
+    Contact: uvietoboretreasure@gmail.com
+    Date: 2022-08-14
+    Description: This is a simple PHP Validator script to send WhatsApp Messages via Trenalyze API.
+*/
 
+
+/* A way of grouping related classes so that they can be identified with a unique name. */
 namespace Trenalyze\Validator;
 
 
+/* It validates the parameters that are passed to the class. */
 class Validator {
+    /* Validating the url to make sure it is a valid url. */
     static function validateUrl($url) {
+       /* Validating the url to make sure it is a valid url. */
         $url = filter_var($url, FILTER_VALIDATE_URL);
+
+        /* Checking if the url is valid and if it is not, it returns a json object that contains the
+        status of the validation and the message. */
         if ($url === false) {
+            /* An array that contains the status of the validation and the message. */
             $info = [
                 'status' => false,
                 'message' => 'Oops Media url Must be a valid URL'
             ];
             
+            /* Returning the array as a json object. */
             return json_encode($info);
         } else {
+           /* An array that contains the status of the validation and the message. */
             $info = [
                 'status' => true,
                 'message' => 'Valid URL'
             ];
             
+            /* Returning the array as a json object. */
             return json_encode($info);
         }
     }
 
+    /* Validating the debug value to make sure it is a boolean. */
     static function validateDebug($debug) {
+       /* Validating the debug value to make sure it is a boolean. */
         $validate = filter_var($debug, FILTER_VALIDATE_BOOLEAN);
+       /* Validating the debug value to make sure it is a boolean. */
         if ($validate === false) {
+            /* An array that contains the status of the validation and the message. */
             $info = [
                 'status' => false,
                 'message' => 'Debug value must be a Boolean'
             ];
             
+           /* Returning the array as a json object. */
             return json_encode($info);
         } else {
+           /* An array that contains the status of the validation and the message. */
             $info = [
                 'status' => true,
                 'message' => 'Valid debug value'
             ];
             
+           /* Returning the array as a json object. */
             return json_encode($info);
         }
     }
 
+    /* Validating the buttons to make sure it is an array. */
     static function validateButtons($buttons) {
+        /* Checking if the buttons are an array. */
         if (is_array($buttons)) {
+            /* An array that contains the status of the validation and the message. */
             $info = [
                 'status' => true,
                 'message' => 'Buttons are valid'
             ];
 
+           /* Returning the array as a json object. */
             return json_encode($info);
         } else {
+            /* An array that contains the status of the validation and the message. */
             $info = [
                 'status' => false,
                 'message' => 'Buttons must be an Array'
             ];
 
+           /* Returning the array as a json object. */
             return json_encode($info);
         }
     }
