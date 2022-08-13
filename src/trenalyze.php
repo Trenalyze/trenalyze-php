@@ -150,7 +150,7 @@ class Trenalyze {
     }
 
     private static function apiurl(){
-        return 'https://trenalyze.com/public/api'; // It must be 'https://trenalyze.com/public/api/send'
+        return 'https://trenalyze.com/api'; // It must be 'https://trenalyze.com/public/api/send'
     }
 
     private static function getApiUrl($apiUrl, $debug) {
