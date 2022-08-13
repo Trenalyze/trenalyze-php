@@ -13,7 +13,6 @@ use Trenalyze\Validator\Validator;
 /* It sends a WhatsApp message to a given number. */
 class Trenalyze {
 
-
     /* Declaring a variable. */
     public $debug;
 
