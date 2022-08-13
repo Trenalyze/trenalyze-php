@@ -18,7 +18,7 @@ Using composer:
 ```shell
 $ composer require trenalyze/trenalyze
 ```
-**Note:** Add this line of code in your composer.json file
+**Note:** Add this line of code to your composer.json file
 ```json
 "minimum-stability": "dev",
 ```
@@ -40,26 +40,26 @@ use Trenalyze\Trenalyze;
 | Param | Type | Description |
 | --- | --- | --- |
 | token | `string` | Use your Trenalyze Token from your [Dashboard](https://trenalyze.com). |
-| sender | `interger` | Enter the WhatApp Number that has already be scanned on the Trenalyze [Dashboard](https://trenalyze.com). |
-| debug | `boolean` | (OPTIONAL). Default is false. But you can set to be true and the debug message is passed onto the console. |
+| sender | `interger` | Enter the WhatApp Number that has already been scanned on the Trenalyze [Dashboard](https://trenalyze.com). |
+| debug | `boolean` | (OPTIONAL). Default is false. But you can set it to be true and the debug message is passed onto the console. |
 
 ```php
 // Set The Config
 $wa = new Trenalyze(YOUR_TRENALYZE_TOKEN_HERE, YOUR_WHATASPP_NUMBER_HERE, true);
 ```
 
-**Note:** Phone number should be in following format `12345678912`, without `+` or any other symbols
+**Note:** Phone number should be in the following format `12345678912`, without `+` or any other symbols
 
 ### 2. Initialize needed params in an array 
 
 | Param | Type | Description |
 | --- | --- | --- |
-| receiver | `interger` | Phone number should be in following format `12345678912`, without `+` or any other symbols. |
+| receiver | `interger` | Phone number should be in the international format `2348157002782`, without `+` or any other symbols. |
 | message | `interger` | Enter the desired text message to send. |
 | mediaurl | `string` | (OPTIONAL). **BUT MUST BE DECLARED** This should be a valid media/file link. [Learn More](https://trenalyze.com) |
 | buttons | `array` | (OPTIONAL). **BUT MUST BE DECLARED** You can attach quick replies buttons to your message. [Learn More](https://trenalyze.com) |
 ```php
-// Set the Required Parameters for sending message 
+// Set the Required Parameters for sending a message 
 $receiver: '123456789',
 $message: 'Hello World',
 $mediaurl: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
@@ -80,13 +80,13 @@ buttons: ''
 
 | Param | Type | Description |
 | --- | --- | --- |
-| receiver | `interger` | Phone number should be in following format `12345678912`, without `+` or any other symbols. |
+| receiver | `interger` | Phone number should be in the following format `12345678912`, without `+` or any other symbols. |
 | message | `interger` | Enter the desired text message to send. |
 | mediaurl | `string` | (OPTIONAL). **BUT MUST BE DECLARED** This should be a valid media/file link. [Learn More](https://trenalyze.com) |
 | buttons | `array` | (OPTIONAL). **BUT MUST BE DECLARED** You can attach quick replies buttons to your message. [Learn More](https://trenalyze.com) |
 
 ```php
-// Initialize the send whatsapp message functions
+// Initialize the send WhatsApp message functions
 $res = json_decode($wa->sendMessage($receiver, $message, $buttons, $mediaurl));
 ```
 
@@ -96,6 +96,6 @@ $res = json_decode($wa->sendMessage($receiver, $message, $buttons, $mediaurl));
 if ($res->statusCode != 200) {
     echo $res->message;
 } else {
-    echo 'WhatsApp Message sent successfully';
+    echo 'WhatsApp Message sent successfully;
 }
 ```
