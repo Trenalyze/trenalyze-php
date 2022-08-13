@@ -13,6 +13,15 @@ use Trenalyze\Validator\Validator;
 /* It sends a WhatsApp message to a given number. */
 class Trenalyze {
 
+
+    /* Declaring a variable. */
+    public $debug;
+
+    /* Declaring a variable. */
+    public $sender;
+
+    /* Declaring a variable. */
+    public $token;
    /**
     * The function __construct() is a special function that is called when an object is created. 
     * 
@@ -20,9 +29,9 @@ class Trenalyze {
     * 
     * The function __construct() is a special function that is
     * 
-    * @param token The token you get from the botfather
-    * @param sender The phone number you want to send the message from.
-    * @param debug If set to true, the script will output the response from the API.
+    * @param $token 'The token you get from the botfather
+    * @param $sender 'The phone number you want to send the message from.
+    * @param $debug 'If set to true, the script will output the response from the API.
     */
     public function __construct($token, $sender, $debug = false) {
 
@@ -39,10 +48,10 @@ class Trenalyze {
    /**
     * If the token is valid, return the token. If the token is invalid, return a 400 status code.
     * 
-    * @param token The token you want to validate.
-    * @param debug true/false
+    * @param $token 'The token you want to validate'.
+    * @param $debug true/false
     * 
-    * @return The token is being returned.
+    * @return 'The token is being returned'.
     */
     private static function getToken($token, $debug) {
         /* Decoding the json string into an object. */
@@ -80,10 +89,10 @@ class Trenalyze {
   /**
    * It takes a URL, validates it, and returns the URL if it's valid.
    * 
-   * @param mediaurl The URL of the media you want to download.
-   * @param debug true/false
+   * @param $mediaurl 'The URL of the media you want to download.
+   * @param $debug true/false
    * 
-   * @return the  variable.
+   * @return 'the  variable.
    */
     private static function getMediaUrl($mediaurl, $debug) {
         $validate = json_decode(Validator::validateUrl($mediaurl));
@@ -104,10 +113,10 @@ class Trenalyze {
     /**
      * It takes an array of buttons, validates them, and returns the array of buttons.
      * 
-     * @param buttons An array of buttons.
-     * @param debug boolean, if true, will return the error message in the response.
+     * @param $buttons' An array of buttons.
+     * @param $debug boolean, if true, will return the error message in the response.
      * 
-     * @return the  variable.
+     * @return 'the  variable.
      */
     private static function getButtons($buttons, $debug) {
         $validate = json_decode(Validator::validateButtons($buttons));
@@ -128,10 +137,10 @@ class Trenalyze {
   /**
    * If the sender is valid, return the sender. If not, return a 400 status code
    * 
-   * @param sender The sender ID to be used for sending the message.
-   * @param debug true/false
+   * @param $sender 'The sender ID to be used for sending the message.
+   * @param $debug true/false
    * 
-   * @return the sender.
+   * @return 'the sender.
    */
     private static function getSender($sender, $debug) {
         $validate = json_decode(Validator::validateSender($sender));
@@ -172,13 +181,13 @@ class Trenalyze {
    /**
     * It sends a message to a WhatsApp number
     * 
-    * @param receiver The phone number of the person you want to send the message to.
-    * @param message The message you want to send to the user.
-    * @param buttons This is an array of buttons to be displayed on the message.
-    * @param mediaurl This is the URL of the media you want to send. It can be a video, image, audio,
+    * @param $receiver 'The phone number of the person you want to send the message to.
+    * @param $message 'The message you want to send to the user.
+    * @param $buttons 'This is an array of buttons to be displayed on the message.
+    * @param $mediaurl 'This is the URL of the media you want to send. It can be a video, image, audio,
     * or document.
     * 
-    * @return The result of the request.
+    * @return 'The result of the request.
     */
     public function sendMessage($receiver, $message, $buttons = '', $mediaurl = '') {
         if ($mediaurl != '') {
@@ -244,11 +253,11 @@ class Trenalyze {
 /**
  * It takes a data array, a url, and a path, and returns the http code of the response.
  * 
- * @param data The data to be sent to the API.
- * @param url https://trenalyze.com/public/api/send
- * @param path /send
+ * @param $data 'The data to be sent to the API.
+ * @param $url https://trenalyze.com/public/api/send
+ * @param $path /send
  * 
- * @return The HTTP response code.
+ * @return 'The HTTP response code.
  */
     private static function curlRequest($data, $url, $path) {
         $url = "{$url}{$path}";
