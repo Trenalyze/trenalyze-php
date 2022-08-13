@@ -22,6 +22,7 @@ class Trenalyze {
 
     /* Declaring a variable. */
     public $token;
+    
    /**
     * The function __construct() is a special function that is called when an object is created. 
     * 
