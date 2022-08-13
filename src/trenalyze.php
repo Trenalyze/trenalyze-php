@@ -186,8 +186,6 @@ class Trenalyze {
     * @param $buttons 'This is an array of buttons to be displayed on the message.
     * @param $mediaurl 'This is the URL of the media you want to send. It can be a video, image, audio,
     * or document.
-    * 
-    * @return 'The result of the request.
     */
     public function sendMessage($receiver, $message, $buttons = '', $mediaurl = '') {
         if ($mediaurl != '') {
@@ -254,7 +252,7 @@ class Trenalyze {
  * It takes a data array, a url, and a path, and returns the http code of the response.
  * 
  * @param $data 'The data to be sent to the API.
- * @param $url https://trenalyze.com/public/api/send
+ * @param $url https://trenalyze.com/api/send
  * @param $path /send
  * 
  * @return 'The HTTP response code.
