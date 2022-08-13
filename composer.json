@@ -19,10 +19,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Trenalyze\\Trenalyze('', '', '')"
+                "Trenalyze\\Trenalyze"
             ],
             "allias": {
-                "Trenalyze": "Trenalyze\\Trenalyze('', '', '')"
+                "Trenalyze": "Trenalyze\\Trenalyze"
             }
         }
     }
